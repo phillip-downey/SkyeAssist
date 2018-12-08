@@ -44,8 +44,8 @@ unsigned long vib_end_time = 0;
 bool vib_enabled = false;
 
 // Integral control variables
-float kp = 1; //TODO tune these gains in the actual system
-float ki = 0.05; //TODO tune these gains in the actual system
+float kp = 1; 
+float ki = 0.05; 
 float err_sum = 0; //Integral of the error
 float u = 0; //input to the motor (PWM)
 
@@ -195,7 +195,7 @@ void loop() {
         digitalWrite(M1DIR, LOW);
       }
 
-      if (abs(u) > 10) { //If we are far enough away from the reference (helps avoid squealing), TODO enforce motor limits
+      if (abs(u) > 10) { //If we are far enough away from the reference (helps avoid squealing)
         int manipulated_pwm = constrain(abs(u), 1, 255); //limit the pwm command to be [1:255]
         analogWrite(M1PWM, manipulated_pwm); //apply the feedback controller input
       }
@@ -203,7 +203,7 @@ void loop() {
         analogWrite(M1PWM, 0); //apply 0 so that it doesn't "whine"
       }
 
-      if (poll_black_button()) { //TODO enfore motor limits
+      if (poll_black_button()) { 
         digitalWrite(M1DIR, HIGH); //black button commands the motor one way
         analogWrite(M1PWM, buttonPWM); //apply the designated pwm
         err_sum = 0; //reset the integral value in the pot controller
@@ -213,7 +213,7 @@ void loop() {
 
       }
 
-      if (poll_red_button()) { //TODO enfore motor limits
+      if (poll_red_button()) { 
         digitalWrite(M1DIR, LOW); //red button commands the motor the other way
         analogWrite(M1PWM, buttonPWM);
         err_sum = 0; //reset the integral value in the pot controller
@@ -252,7 +252,7 @@ void loop() {
         digitalWrite(M1DIR, LOW);
       }
 
-      if (abs(u) > 10) { //if there's a notable difference, TODO enforce motor limits
+      if (abs(u) > 10) { //if there's a notable difference
         int manipulated_pwm = constrain(abs(u), 1, 255);
         //Serial.println(manipulated_pwm);
         analogWrite(M1PWM, manipulated_pwm); //apply the feedback controller
